@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>
+      Login
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding class="vertical-align-content">
+  <ion-card>
+    <ion-list inset>
+      <ion-item>
+        <ion-label floating>Email</ion-label>
+        <ion-input type="email" #txtEmail ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Password</ion-label>
+        <ion-input type="password" #txtPassword></ion-input>
+      </ion-item>
+      <button ion-button full (click)="clickLogin(txtEmail.value, txtPassword.value)">Login</button>
+    </ion-list>
+  </ion-card>
+</ion-content>

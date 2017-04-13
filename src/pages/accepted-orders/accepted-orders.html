@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>Accepted Orders</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list *ngFor="let order of orderList | async | reverse | filterOrderByStatus: 'Received by Delivery Boy'">
+    <button ion-item (click)="clickOrder(order.$key)">
+        <h2>
+          Order No.: {{order.orderId}}
+        </h2>
+      <h2>
+        {{order.orderTime | date: 'dd/MM/yyyy HH:mm'}}
+        </h2>
+    </button>
+  </ion-list>
+  <div *ngIf="(orderList | async | filterOrderByStatus: 'Received by Delivery Boy')?.length == 0" text-center class="center">
+    <h2>
+      No accepted orders currently available.
+    </h2>
+  </div>
+</ion-content>
