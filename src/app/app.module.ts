@@ -12,6 +12,7 @@ import { PendingOrdersPage } from '../pages/pending-orders/pending-orders';
 import { TabsPage } from '../pages/tabs/tabs';
 import { OrderDetailsPage } from '../pages/order-details/order-details';
 import { OrderPrefsPage } from '../pages/order-prefs/order-prefs';
+import { ProfilePage } from '../pages/profile/profile';
 
 import { AccountService } from '../services/account-service';
 import { OrderService } from '../services/order-service';
@@ -46,7 +47,8 @@ export const firebaseAuthConfig = {
     OrderPrefsPage,
     TabsPage,
     OrderFilterByStatusPipe,
-    ReversePipe
+    ReversePipe,
+    ProfilePage
   ],
   imports: [
     BrowserModule,
@@ -64,7 +66,8 @@ export const firebaseAuthConfig = {
     PendingOrdersPage,
     TabsPage,
     OrderDetailsPage,
-    OrderPrefsPage
+    OrderPrefsPage,
+    ProfilePages
   ],
   providers: [
     StatusBar,
