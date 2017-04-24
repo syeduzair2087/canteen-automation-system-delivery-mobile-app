@@ -67,7 +67,7 @@ export const firebaseAuthConfig = {
     TabsPage,
     OrderDetailsPage,
     OrderPrefsPage,
-    ProfilePages
+    ProfilePage
   ],
   providers: [
     StatusBar,

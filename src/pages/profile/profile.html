@@ -1,0 +1,37 @@
+<ion-header>
+
+    <ion-navbar color="nav">
+        <ion-title>Profile</ion-title>
+    </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+
+  
+<a (click)="clickImage()">
+  <img [src]="staffMember.imageURL"  class="rounded-circle" width="75%" padding>
+  </a>
+    <ion-list no-lines>
+        <ion-item (click)="clickName()">
+            <h2>Name</h2>
+            <p>{{staffMember.name}}</p>
+        </ion-item>
+        <ion-item (click)="clickEmail()">
+            <h2>Email</h2>
+            <p>{{staffMember.email}}</p>
+        </ion-item>
+        <ion-item (click)="clickContact()">
+            <h2>Contact</h2>
+            <p>{{staffMember.contact}}</p>
+        </ion-item>
+        <ion-item (click)="clickCnic()">
+            <h2>Cninc</h2>
+            <p>{{staffMember.cnic}}</p>
+        </ion-item>
+        <ion-item (click)="clickAddress()">
+            <h2>address</h2>
+            <p>{{staffMember.address}}</p>
+        </ion-item>
+    </ion-list>
+</ion-content>

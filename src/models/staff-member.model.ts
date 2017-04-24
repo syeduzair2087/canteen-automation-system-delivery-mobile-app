@@ -3,7 +3,8 @@ export interface StaffMember {
     email: string,
     contact: string,
     cnic: string,
-    address: string
+    address: string,
+    imageURL?: string,
     $key?: string,
     status: string
 }

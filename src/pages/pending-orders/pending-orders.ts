@@ -6,7 +6,7 @@ import { ReversePipe } from '../../pipes/reverse.pipe';
 import { OrderFilterByStatusPipe } from '../../pipes/order.pipe';
 import { OrderDetailsPage } from '../order-details/order-details';
 import { LoginPage } from '../login/login';
-// import {  } from '../'
+import { ProfilePage } from '../profile/profile'
 import { Subscription } from 'rxjs';
 @Component({
   selector: 'page-pending-orders',
@@ -38,12 +38,11 @@ export class PendingOrdersPage {
   }
 
   ionViewDidLeave() {
-    console.log('working');
     this.orderSubscription.unsubscribe();
   }
 
   clickProfile() {
-    // this.navCtrl.push(ProfilePage);
+    this.navCtrl.push(ProfilePage);
   }
 
   loadOrderData() {
