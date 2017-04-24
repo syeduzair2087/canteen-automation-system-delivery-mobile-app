@@ -8,14 +8,14 @@ export class OrderService {
     constructor(private angularFire: AngularFire, private loadingCtrl: LoadingController, private toastCtrl: ToastController) { }
 
     getOrders() {
-        this.angularFire.database.list('/orders/'
-            , {
-                query: {
-                    orderByChild: 'status/staffMemberId',
-                    equalTo: localStorage.getItem('uid')
-                }
-            }
-        ).subscribe((data) => console.log(data));
+        // this.angularFire.database.list('/orders/'
+        //     , {
+        //         query: {
+        //             orderByChild: 'status/staffMemberId',
+        //             equalTo: localStorage.getItem('uid')
+        //         }
+        //     }
+        // ).subscribe((data) => console.log(data));
 
         return this.angularFire.database.list('/orders/', {
             query: {
