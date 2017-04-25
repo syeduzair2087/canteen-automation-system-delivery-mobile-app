@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, AlertController, ActionSheetController } from 'ionic-angular';
 import { StaffMember } from '../../models/staff-member.model'
 import { AccountService } from '../../services/account-service';
+import { Camera } from 'ionic-native';
 @Component({
     selector: 'page-profile',
     templateUrl: 'profile.html'
@@ -77,7 +78,7 @@ export class ProfilePage {
     }).present();
   }
 
-  clickCinc() {
+  clickCnic() {
     this.alertCtrl.create({
       subTitle: 'Enter new name',
       inputs: [
@@ -154,6 +155,125 @@ export class ProfilePage {
       ]
     }).present();
   }
+
+  clickImage() {
+    this.actionCtrl.create({
+      title: 'Select source',
+      buttons: [
+        {
+          text: 'Gallery',
+          icon: 'image',
+          handler: () => {
+            Camera.getPicture({
+              targetWidth: 300,
+              targetHeight: 300,
+              quality: 100,
+              allowEdit: true,
+              correctOrientation: false,
+              // saveToPhotoAlbum: true,
+              encodingType: Camera.EncodingType.JPEG,
+              mediaType: Camera.MediaType.PICTURE,
+              destinationType: Camera.DestinationType.DATA_URL,
+              sourceType: Camera.PictureSourceType.PHOTOLIBRARY
+            }).then((selectedImage) => {
+              this.accountService.uploadImage(selectedImage).then((downloadUrl: string) => {
+                this.accountService.updateInfo(this.staffMember.name, downloadUrl).then(() => {
+                  this.staffMember.imageURL = downloadUrl;
+                  this.alertCtrl.create({
+                    subTitle: 'Your image has been successfully updated.',
+                    buttons: [
+                      {
+                        text: 'OK',
+                        role: 'cancel'
+                      }
+                    ]
+                  }).present();
+                }).catch(() => { })
+              }).catch((error) => {
+                this.alertCtrl.create({
+                  subTitle: 'Failed to upload image. Please try again.',
+                  buttons: [
+                    {
+                      text: 'OK',
+                      role: 'cancel'
+                    }
+                  ]
+                }).present()
+              })
+            }).catch((error) => {
+              this.alertCtrl.create({
+                message: error,
+                buttons: [
+                  {
+                    text: 'OK',
+                    role: 'cancel'
+                  }
+                ]
+              }).present();
+            })
+          }
+        },
+        {
+          text: 'Camera',
+          icon: 'camera',
+          handler: () => {
+            Camera.getPicture({
+              targetWidth: 300,
+              targetHeight: 300,
+              quality: 100,
+              allowEdit: true,
+              correctOrientation: false,
+              // saveToPhotoAlbum: true,
+              encodingType: Camera.EncodingType.JPEG,
+              mediaType: Camera.MediaType.PICTURE,
+              destinationType: Camera.DestinationType.DATA_URL,
+              sourceType: Camera.PictureSourceType.CAMERA
+            }).then((selectedImage) => {
+              this.accountService.uploadImage(selectedImage).then((downloadUrl: string) => {
+                this.accountService.updateInfo(this.staffMember.name, downloadUrl).then(() => {
+                  this.staffMember.imageURL = downloadUrl;
+                  this.alertCtrl.create({
+                    subTitle: 'Your image has been successfully updated.',
+                    buttons: [
+                      {
+                        text: 'OK',
+                        role: 'cancel'
+                      }
+                    ]
+                  }).present();
+                }).catch(() => { })
+              }).catch(() => {
+                this.alertCtrl.create({
+                  subTitle: 'Failed to upload image. Please try again.',
+                  buttons: [
+                    {
+                      text: 'OK',
+                      role: 'cancel'
+                    }
+                  ]
+                }).present()
+              })
+            }).catch((error) => {
+              this.alertCtrl.create({
+                message: error,
+                buttons: [
+                  {
+                    text: 'OK',
+                    role: 'cancel'
+                  }
+                ]
+              }).present();
+            })
+          }
+        },
+        {
+          text: 'Cancel',
+          icon: 'close'
+        }
+      ]
+    }).present();
+  }
+
 
   loadUserData() {
     this.accountService.getUserData().then((data: StaffMember) => {

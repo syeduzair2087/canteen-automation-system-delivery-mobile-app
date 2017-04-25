@@ -139,7 +139,7 @@ export class AccountService {
                     displayName: displayName,
                     photoURL: imageUrl
                 }).then(() => {
-                    this.angularFire.database.object('roles/chefs/' + localStorage.getItem('uid')).update({
+                    this.angularFire.database.object('roles/delivery_boys/' + localStorage.getItem('uid')).update({
                         name: displayName
                     }).then(() => {
                         this.toastCtrl.create({
@@ -174,7 +174,7 @@ export class AccountService {
                 content: 'UPdating contact number...'
             });
             loading.present();
-            this.angularFire.database.object('roles/chefs/' + localStorage.getItem('uid')).update({
+            this.angularFire.database.object('roles/delivery_boys/' + localStorage.getItem('uid')).update({
                 contact: contact
             }).then(() => {
                 this.toastCtrl.create({
@@ -200,7 +200,7 @@ export class AccountService {
                 content: 'UPdating contact number...'
             });
             loading.present();
-            this.angularFire.database.object('roles/chefs/' + localStorage.getItem('uid')).update({
+            this.angularFire.database.object('roles/delivery_boys/' + localStorage.getItem('uid')).update({
                 cnic: cnic
             }).then(() => {
                 this.toastCtrl.create({
@@ -228,7 +228,7 @@ export class AccountService {
             loading.present();
             this.angularFire.auth.subscribe((user: FirebaseAuthState) => {
                 user.auth.updateEmail(email).then(() => {
-                    this.angularFire.database.object('roles/chefs/' + localStorage.getItem('uid')).update({
+                    this.angularFire.database.object('roles/delivery_boys/' + localStorage.getItem('uid')).update({
                         email: email
                     }).then(() => {
                         this.toastCtrl.create({
@@ -264,7 +264,7 @@ export class AccountService {
                 content: 'UPdating contact number...'
             });
             loading.present();
-            this.angularFire.database.object('roles/chefs/' + localStorage.getItem('uid')).update({
+            this.angularFire.database.object('roles/delivery_boys/' + localStorage.getItem('uid')).update({
                 address: address
             }).then(() => {
                 this.toastCtrl.create({
