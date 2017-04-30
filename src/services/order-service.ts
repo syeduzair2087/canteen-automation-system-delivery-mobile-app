@@ -42,7 +42,7 @@ export class OrderService {
     getJobCount() {
         return new Promise((res, rej) => {
             let countSubscription = this.angularFire.database.object('/roles/delivery_boys/' + localStorage.getItem('uid')).subscribe((data) => {
-                res(data);
+                res(data.job_count);
                 countSubscription.unsubscribe();
             })
         })
