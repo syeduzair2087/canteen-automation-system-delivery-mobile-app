@@ -17,7 +17,7 @@ export class PendingOrdersPage {
   orderSubscription: Subscription;
   constructor(public navCtrl: NavController, private orderService: OrderService, private accountService: AccountService, private app: App) { }
 
-  ngOnInit() {
+  ionViewDidEnter() {
     this.loadOrderData();
   }
 
