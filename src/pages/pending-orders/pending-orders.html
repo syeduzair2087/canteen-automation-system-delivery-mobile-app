@@ -5,13 +5,14 @@
 </ion-header>
 
 <ion-content padding>
-   <ion-fab top right edge>
-    <button ion-fab mini><ion-icon name="add"></ion-icon></button>
-    <ion-fab-list>
-      <button ion-fab (click)="clickProfile()"><ion-icon name="settings"></ion-icon></button>
-      <button ion-fab (click)="clickLogout()"><ion-icon name="power"></ion-icon></button>
+  <ion-fab top right edge>
+    <button ion-fab mini color="fab-yellow"><ion-icon name="list"></ion-icon></button>
+    <ion-fab-list >
+      <button ion-fab color="dark" (click)="clickProfile()"><ion-icon name="settings"></ion-icon></button>
+      <button ion-fab color="dark" (click)="clickLogout()"><ion-icon name="power"></ion-icon></button>
     </ion-fab-list>
   </ion-fab>
+
   <ion-list *ngFor="let order of orderList | reverse | filterOrderByStatus: 'Assigned to Delivery Boy'">
     <button ion-item (click)="clickOrder(order.$key)">
         <h2>
@@ -20,6 +21,9 @@
       <h2>
         {{order.orderTime | date: 'dd/MM/yyyy HH:mm'}}
         </h2>
+         <h3>
+         Cabin No.: {{order.cabin}}
+        </h3>
     </button>
   </ion-list>
   <div *ngIf="(orderList| filterOrderByStatus: 'Assigned to Delivery Boy')?.length == 0" text-center class="center">
