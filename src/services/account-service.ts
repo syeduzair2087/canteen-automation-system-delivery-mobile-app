@@ -305,16 +305,17 @@ export class AccountService {
     
     
     addNotificationToken(token: string) {
+        console.log('token: ' + token);
+        
         return new Promise((res, rej) => {
-            let clientAuth = this.angularFire.auth;
-            clientAuth.subscribe((data: FirebaseAuthState) => {
-                this.angularFire.database.list('notificationTokens/' + data.uid + '/').push(token).then(() => {
-                    clientAuth.unsubscribe();
+                this.angularFire.database.list('notificationTokens/' + localStorage.getItem('uid')).push(token).then(() => {
                     console.log('Token added sucessfully!');
                     res('')
+                }).catch((error) => {
+                    console.log(error.message);
+                    rej(error.message)
                 })
             })
-        })
     }
     
 }

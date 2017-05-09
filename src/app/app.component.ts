@@ -21,11 +21,11 @@ export class MyApp {
       statusBar.styleDefault();
       statusBar.backgroundColorByHexString('#2B68CF');
       splashScreen.hide();
-      this.initPushNotification();
-      if (this.accountService.checkUserIsLoggedIn()) {
+        if (this.accountService.checkUserIsLoggedIn()) {
         this.rootPage = TabsPage;
-      }
+           this.initPushNotification();
 
+      }
       else {
         this.rootPage = LoginPage;
       }
@@ -53,10 +53,12 @@ export class MyApp {
     const pushObject: PushObject = this.push.init(option);
 
 
-    pushObject.on('registration').subscribe((data: any) => {
-      console.log(data.registrationId);
+    // pushObject.on('registration').subscribe((data: any) => {
+    //   console.log(data.registrationId);
+    //   this.accountService.addNotificationToken(data.registrationId).then(() => {
+    //   })
 
-    })
+    // })
 
     pushObject.on('notification').subscribe((data: any) => {
       console.log(data.message);
