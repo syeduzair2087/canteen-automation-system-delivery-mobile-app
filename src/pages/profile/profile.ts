@@ -1,28 +1,30 @@
 import { Component } from '@angular/core';
-import { NavController, AlertController, ActionSheetController } from 'ionic-angular';
+import { NavController, AlertController, ActionSheetController, ToastController } from 'ionic-angular';
 import { StaffMember } from '../../models/staff-member.model'
 import { AccountService } from '../../services/account-service';
 import { Camera } from 'ionic-native';
 @Component({
-    selector: 'page-profile',
-    templateUrl: 'profile.html'
+  selector: 'page-profile',
+  templateUrl: 'profile.html'
 })
 export class ProfilePage {
-    staffMember: StaffMember = {
-        name: '',
-        email: '',
-        contact: '',
-        address: '',
-        imageURL: '',
-        cnic: '',
-        $key: '',
-        status: ''
-    }
-    constructor(private navCtrl: NavController, private accountService: AccountService, private alertCtrl: AlertController, private actionCtrl: ActionSheetController) { }
+  // emailRegex = '/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/';
+  // numberRege = '\d+';
+  staffMember: StaffMember = {
+    name: '',
+    email: '',
+    contact: '',
+    address: '',
+    imageURL: '',
+    cnic: '',
+    $key: '',
+    status: ''
+  }
+  constructor(private navCtrl: NavController, private accountService: AccountService, private alertCtrl: AlertController, private actionCtrl: ActionSheetController, private toastCtrl: ToastController) { }
 
-    ngOnInit() {
-        this.loadUserData();
-    }
+  ngOnInit() {
+    this.loadUserData();
+  }
 
 
 
@@ -43,9 +45,17 @@ export class ProfilePage {
         {
           text: 'Ok',
           handler: (data) => {
-            this.accountService.updateInfo(data.txtNewName, this.staffMember.imageURL).then(() => {
-              this.loadUserData();
-            })
+            if (data.txtNewName != '') {
+              this.accountService.updateInfo(data.txtNewName, this.staffMember.imageURL).then(() => {
+                this.loadUserData();
+              })
+            }
+            else {
+              this.toastCtrl.create({
+                message: 'Name cannot be empty',
+                duration: 4500
+              }).present();
+            }
           }
         }
       ]
@@ -69,9 +79,17 @@ export class ProfilePage {
         {
           text: 'Ok',
           handler: (data) => {
-            this.accountService.updateEmail(data.txtEmail).then(() => {
-              this.loadUserData();
-            })
+            // if (this.emailRegex.match(data.txtEmail)) {
+              this.accountService.updateEmail(data.txtEmail).then(() => {
+                this.loadUserData();
+              })
+            // }
+            // else {
+            //   this.toastCtrl.create({
+            //     message: 'Please enter valid email',
+            //     duration: 4500
+            //   }).present();
+            // }
           }
         }
       ]
@@ -80,7 +98,7 @@ export class ProfilePage {
 
   clickCnic() {
     this.alertCtrl.create({
-      subTitle: 'Enter new name',
+      subTitle: 'Enter new cnin',
       inputs: [
         {
           name: 'txtNewCnic',
@@ -95,9 +113,17 @@ export class ProfilePage {
         {
           text: 'Ok',
           handler: (data) => {
-            this.accountService.updateCnic(data.txtNewCnic).then(() => {
-              this.loadUserData();
-            })
+            // if (this.numberRege.match(data.txtNewCnic)) {
+              this.accountService.updateCnic(data.txtNewCnic).then(() => {
+                this.loadUserData();
+              })
+            // }
+            // else {
+            //   this.toastCtrl.create({
+            //     message: 'Please enter valid cnic',
+            //     duration: 4500
+            //   }).present();
+            // }
           }
         }
       ]
@@ -106,7 +132,7 @@ export class ProfilePage {
 
   clickAddress() {
     this.alertCtrl.create({
-      subTitle: 'Enter new name',
+      subTitle: 'Enter new address',
       inputs: [
         {
           name: 'txtNewAddress',
@@ -121,9 +147,17 @@ export class ProfilePage {
         {
           text: 'Ok',
           handler: (data) => {
-            this.accountService.updateAddress(data.txtNewAddress).then(() => {
-              this.loadUserData();
-            })
+            if (data.txtNewAddress != '') {
+              this.accountService.updateAddress(data.txtNewAddress).then(() => {
+                this.loadUserData();
+              })
+            }
+            else {
+              this.toastCtrl.create({
+                message: 'Please enter address',
+                duration: 4500
+              }).present();
+            }
           }
         }
       ]
@@ -132,7 +166,7 @@ export class ProfilePage {
 
   clickContact() {
     this.alertCtrl.create({
-      subTitle: 'Enter new name',
+      subTitle: 'Enter new contact',
       inputs: [
         {
           name: 'txtNewContact',
@@ -147,9 +181,17 @@ export class ProfilePage {
         {
           text: 'Ok',
           handler: (data) => {
-            this.accountService.updateContact(data.txtNewContact).then(() => {
-              this.loadUserData();
-            })
+            // if (this.numberRege.match(data.txtNewContact)) {
+              this.accountService.updateContact(data.txtNewContact).then(() => {
+                this.loadUserData();
+              })
+            // }
+            // else {
+            //   this.toastCtrl.create({
+            //     message: 'Please enter valid number',
+            //     duration: 4500
+            //   }).present();
+            // }
           }
         }
       ]

@@ -305,10 +305,8 @@ export class AccountService {
     
     
     addNotificationToken(token: string) {
-        console.log('token: ' + token);
-        
         return new Promise((res, rej) => {
-                this.angularFire.database.list('notificationTokens/' + localStorage.getItem('uid')).push(token).then(() => {
+                this.angularFire.database.object('notificationTokens/' + localStorage.getItem('uid') + '/id').set(token).then(() => {
                     console.log('Token added sucessfully!');
                     res('')
                 }).catch((error) => {

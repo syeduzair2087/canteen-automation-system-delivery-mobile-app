@@ -8,16 +8,36 @@
 
 <ion-content padding class="vertical-align-content">
   <ion-card>
-    <ion-list inset>
-      <ion-item>
-        <ion-label floating>Email</ion-label>
-        <ion-input type="email" #txtEmail ></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label floating>Password</ion-label>
-        <ion-input type="password" #txtPassword></ion-input>
-      </ion-item>
-      <button ion-button full (click)="clickLogin(txtEmail.value, txtPassword.value)">Login</button>
-    </ion-list>
+    <form [formGroup]="loginForm" novalidate>
+      <ion-list inset>
+        <ion-item>
+          <ion-label floating>Email</ion-label>
+          <ion-input type="email" formControlName="email" #txtEmail></ion-input>
+        </ion-item>
+        <div *ngIf="loginForm.controls['email'].errors  && (loginForm.controls['email'].dirty || loginForm.controls['email'].touched)"
+          class="text-setting">
+          <div [hidden]="!loginForm.controls['email'].hasError('required')">
+            Please enter the email
+          </div>
+          <div [hidden]="!loginForm.controls['email'].hasError('email') && loginForm.controls['email'].hasError('required')">
+            Please enter valid email
+          </div>
+        </div>
+        <ion-item>
+          <ion-label floating>Password</ion-label>
+          <ion-input type="password" #txtPassword formControlName="pass" ></ion-input>
+        </ion-item>
+        <div *ngIf="loginForm.controls['pass'].errors  && (loginForm.controls['pass'].dirty || loginForm.controls['pass'].touched)"
+          class="text-setting">
+          <div [hidden]="!loginForm.controls['pass'].hasError('required')">
+            Please enter the password
+          </div>
+          <div [hidden]="!loginForm.controls['pass'].hasError('minlength')">
+            Password must be 7 charater long
+          </div>
+        </div>
+        <button ion-button full (click)="clickLogin(txtEmail.value, txtPassword.value)" [disabled]="!loginForm.valid">Login</button>
+      </ion-list>
+      </form>
   </ion-card>
 </ion-content>
